@@ -27,4 +27,7 @@ prompted for the app name, bundle identifier, and other information that needs
 to be changed from the boilerplate.
 See: https://github.com/junedomingo/react-native-rename
 
+Finally, don't forget to update README.md for your project and either remove
+this `doc` directory or co-opt it for project-specific documentation.
+
 You're now ready to start working on your new project!
