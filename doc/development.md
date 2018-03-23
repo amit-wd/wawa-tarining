@@ -122,10 +122,11 @@ This is handled via `package.json@jest.moduleNameMapper: "src(.*)": "<rootDir>/s
 This maps any imports from `src/` to the root of the project.
 
 ## Environment Variables / Configuration
-**Do not set secret configuration in version control or the environment**.
+**Do not set sensitive information in configuration in version control or the environment**.
 
 Configuration of the app is handled through environment variables. When running
-the development server, or bundling, the environment variables must be set.
+the development server, or bundling, the environment variables must be set. For
+example:
 
 ```
 API_HOST=test react-native start
@@ -141,3 +142,21 @@ Now you can `import { NAME } from 'src/Config` wherever it's needed.
 
 Remember to set the environment variables you need before running `react-native
 start`, `xcodebuild`, or `android/gradlew assemble$DEBUG_OR_RELEASE`.
+
+### Setting Environment Variables
+Environment variables can be set any way you like, and there are many
+possibilities.  You can set them per-command with key=value syntax. You can also
+set them in your current running environment using `export`.
+
+Here are some examples:
+
+```
+$ API_HOST=test CLIENT_ID=foo react-native start
+
+$ export API_HOST=test
+$ export CLIENT_ID=foo
+$ react-native start
+```
+
+You can also put the `export` calls in your shell setup (e.g. `.zshrc`) to have
+the environment variables set whenever you start a new shell or terminal session.
