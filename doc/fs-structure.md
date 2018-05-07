@@ -166,3 +166,32 @@ These files should not change often. Most development work should be done in `sr
 * tsconfig.json -- TypeScript configuration for source
 * tsconfig.test.json -- TypeScript configuration for tests
 * tslint.json -- TypeScript linter configuration
+
+## Rules for Import Paths
+With [Path Aliases](./development.md#path-aliases), we can import local
+resources directly from `src/`. With this, we have the following rules for
+importing:
+
+1. Third party dependencies should be imported first in files. Generally you
+   will have an import order such as `react` first followed by `react-native`,
+   followed by `rxjs` dependencies and so-on. It's up to the project team to
+   determine this specific ordering of third party imports.
+2. For resources that are grouped as a unit, e.g. `.tsx`, `actions`, `reducer`,
+   and `epic`, these should be kept at the same directory level and imported
+   using a directory relative import, e.g. `import { reducer } from './reducer'`
+   and so on. This allows these resources to be moved together when
+   restructuring directories.
+3. Tests for specific resources can import from one directory up for the
+   resources they need to test. That is to say you will have `reducer.ts` and
+   `__tests__/reducer.test.ts`. In `reducer.test.ts`, you can use
+   `import { reducer } from '../reducer';`. This is because if a directory
+   restructuring is done, the tests will be moved to the same directory as the
+   file that is being tested.
+4. In all other cases, use project-relative imports. That is, use imports that
+   start with `src/`. Avoid using `../../`. This makes it simpler for files to
+   import other local dependencies even in cases where they are both deep in a
+   hierarchy. If the directories are restructured, you will have to rewrite the
+   import path regardless, but it's easier to determine the location of the
+   target resource from `src/` than from any other diretory.
+
+
