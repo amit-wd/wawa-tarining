@@ -1,33 +1,45 @@
 package com.rnts3;
 
-import android.support.annotation.Nullable;
+import android.app.Application;
 
+import com.facebook.react.ReactApplication;
+import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
-import com.reactnativenavigation.NavigationApplication;
-// the following line is present so that `react-native link` works correctly
-// import com.facebook.react.ReactApplication;
+import com.facebook.react.shell.MainReactPackage;
+import com.facebook.soloader.SoLoader;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication extends NavigationApplication {
+public class MainApplication extends Application implements ReactApplication {
+
+  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
-    public boolean isDebug() {
-        return BuildConfig.DEBUG;
+    public boolean getUseDeveloperSupport() {
+      return BuildConfig.DEBUG;
     }
 
-    @Nullable
     @Override
-    public List<ReactPackage> createAdditionalReactPackages() {
-        return Arrays.<ReactPackage>asList(
-            // the following line is present so that `react-native link` works correctly
-            // new MainReactPackage()
-        );
+    protected List<ReactPackage> getPackages() {
+      return Arrays.<ReactPackage>asList(
+          new MainReactPackage()
+      );
     }
 
-    @Nullable
     @Override
-    public String getJSMainModuleName() {
-        return "index";
+    protected String getJSMainModuleName() {
+      return "index";
     }
+  };
+
+  @Override
+  public ReactNativeHost getReactNativeHost() {
+    return mReactNativeHost;
+  }
+
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
+  }
 }

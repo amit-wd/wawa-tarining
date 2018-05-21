@@ -20,7 +20,7 @@ export class Home extends React.Component {
 }
 
 // Connected component is used with Redux store
-export const HomePage = connect()(Home);
+export const HomeScreen = connect()(Home);
 
 // This helps auto-completion / type safety with `StyleSheet.create`
 interface Style {

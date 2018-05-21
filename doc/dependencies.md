@@ -8,7 +8,7 @@ We are totally open to suggestions for superior alternatives to any core
 dependencies, and we'll keep this repo up-to-date with our recommendations.
 
 * react + react-native -- core dependencies
-* react-native-navigation -- navigation
+* react-navigation -- navigation
 * redux + react-redux -- state management
 * redux-observable + rxjs -- side effects
 
