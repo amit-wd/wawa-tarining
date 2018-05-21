@@ -9,6 +9,10 @@ dependencies, and we'll keep this repo up-to-date with our recommendations.
 
 * react + react-native -- core dependencies
 * react-navigation -- navigation
+  * **Note:** react-native-navigation is also an option and may be preferred in
+    cases where navigation does not need a lot of customization or a true
+    native navigation experience is preferred. See the react-native-navigation
+    branch for an example implementation.
 * redux + react-redux -- state management
 * redux-observable + rxjs -- side effects
 
