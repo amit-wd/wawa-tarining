@@ -4,7 +4,7 @@ import * as React from 'react';
 // Note: test renderer must be required after react-native.
 import { create } from 'react-test-renderer';
 
-import { Home } from 'src/home/HomePage';
+import { Home } from 'src/home/HomeScreen';
 
 // Using `create` from `react-test-renderer`, it is possible to convert
 // the rendered element into a JSON object as shown below. Using that
