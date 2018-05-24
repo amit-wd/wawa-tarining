@@ -16,11 +16,13 @@ Next:
 ```sh
 xcodebuild -project ios/$PROJECT.xcodeproj -scheme $SCHEME \
   -configuration $DEBUG_OR_RELEASE \
-  -archivePath ios/output/$PROJECT.xcarchive \
+  -archivePath $PROJECT.xcarchive \
   clean archive
 ```
 
-This will generate the build artifact xcarchive in `ios/output/$PROJECT.xcarchive`.
+If you're using Cocoa Pods, use `-workspace` instead of `-project`.
+
+This will generate the build artifact xcarchive in `$PROJECT.xcarchive`.
 
 You can now create a .ipa using `xcodebuild` or the Xcode GUI with this build scheme.
 
@@ -57,3 +59,13 @@ build, run `./gradlew clean` first.
 
 If the build does not work for some reason, try `rm -rf node_modules` and
 `yarn install` and retry.
+
+## CI / Jenkins
+This project contains a sample Jenkinsfile derived from ones used for past
+React Native projects. You can set up your Jenkins instance to use the Jenkins
+pipeline and read this Jenkinsfile from the repository to perform the build
+steps. You will have to set up some configuration to get started -- specifically
+credentials for the iOS keychain, android keystore, and Hockeyapp.
+
+Refer to the [Jenkinsfile](../Jenkinsfile) which has inline comments in places
+where changes may be needed for specific builds.
