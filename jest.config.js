@@ -12,7 +12,7 @@ module.exports = {
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverageFrom: ['**/*.tsx', '**/*.ts'],
   moduleNameMapper: {
-    'src(.*)': '<rootDir>/src/$1',
+    '^src(.*)': '<rootDir>/src/$1',
   },
   globals: {
     'ts-jest': {
