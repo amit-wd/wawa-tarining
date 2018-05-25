@@ -28,8 +28,8 @@ interface Style {
   textContent: TextStyle;
 }
 
-// React hoists variables. We declare the styles here to keep them out of the
-// way of the component definition
+// TypeScript hoists variables. We declare the styles here to keep them out of
+// the way of the component definition
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
