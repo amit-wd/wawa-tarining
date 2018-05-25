@@ -65,7 +65,15 @@ This project contains a sample Jenkinsfile derived from ones used for past
 React Native projects. You can set up your Jenkins instance to use the Jenkins
 pipeline and read this Jenkinsfile from the repository to perform the build
 steps. You will have to set up some configuration to get started -- specifically
-credentials for the iOS keychain, android keystore, and Hockeyapp.
+`credentials` for the iOS keychain, android keystore, and Hockeyapp. Other
+configuration will likely be required such as the API hostname. These can be
+set as build parameters.
 
 Refer to the [Jenkinsfile](../Jenkinsfile) which has inline comments in places
 where changes may be needed for specific builds.
+
+You will also need to update `ios/exportOptions.plist` for the bundle identifier
+and provisioning profile used for enterprise builds.
+
+`sonar.properties` at the root of the repository will also require appropriate
+updates for sonar analysis -- specifically the project identifying information.
