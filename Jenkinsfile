@@ -6,9 +6,11 @@ pipeline {
     parameters {
         choice(name: 'APP_TO_BUILD', choices: "both\nandroid\nios\nsonar", description: 'Build Android or iOS or Both or Only Sonar run')
         string(name: 'BRANCH', defaultValue: 'develop', description: 'Branch to build')
+
         string(name: 'VERSION_NUMBER', description: 'Version String')
         string(name: 'APP_NAME', description: 'Name to assign to application')
         string(name: 'APP_VERSION_CODE', defaultValue: '0', description: 'Application Version Code')
+
         string(name: 'NOTIFICATION_EMAILS', description: 'Email ids to send notifications')
     }
 
