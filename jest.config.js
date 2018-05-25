@@ -14,9 +14,4 @@ module.exports = {
   moduleNameMapper: {
     '^src(.*)': '<rootDir>/src/$1',
   },
-  globals: {
-    'ts-jest': {
-      tsConfigFile: 'tsconfig.test.json',
-    },
-  },
 };

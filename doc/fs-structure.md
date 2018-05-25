@@ -163,8 +163,8 @@ These files should not change often. Most development work should be done in `sr
 * `ios/` -- the iOS app
 * index.js` -- required by React Native. All this does is import the App file.
 * rn-cli.config.js -- used to register transformations for bundling
-* tsconfig.json -- TypeScript configuration for source
-* tsconfig.test.json -- TypeScript configuration for tests
+* tsconfig.build.json -- TypeScript configuration for build / production
+* tsconfig.json -- TypeScript configuration for development / tests
 * tslint.json -- TypeScript linter configuration
 
 ## Rules for Import Paths

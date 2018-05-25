@@ -1,7 +1,0 @@
-{
-  "extends": "./node_modules/ts-config-mobiquity-react-native/tsconfig.test.json",
-  "compilerOptions": {
-    "baseUrl": "."
-  },
-  "include": ["src/**/*"]
-}

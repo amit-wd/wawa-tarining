@@ -5,6 +5,16 @@
  */
 const blacklist = require('metro/src/blacklist');
 
+/*
+ * react-native-typescript-transformer allows us to specify the TypeScript
+ * configuration file we use. Other tools such as tsserver only use
+ * tsconfig.json. In particular this breaks project-relative importing for tests
+ * and has other implications. The suggested approach is to use tsconfig.json
+ * for development and have a configuration specifically for build as
+ * we do here.
+ */
+process.env.TSCONFIG_PATH = 'tsconfig.build.json';
+
 module.exports = {
   // Use TypeScript with React Native
   getTransformModulePath() {

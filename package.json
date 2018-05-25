@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "precommit": "lint-staged",
-    "test": "tsc --project tsconfig.test.json && tslint --project tsconfig.test.json && jest",
-    "lint": "tslint --project tsconfig.test.json"
+    "precommit": "yarn test && lint-staged",
+    "prepush": "yarn test",
+    "test": "yarn lint && jest",
+    "lint": "tsc && tslint --project tsconfig.json"
   },
   "dependencies": {
     "react": "16.2.0",
