@@ -179,7 +179,7 @@ pipeline {
                 sh 'yarn test --ci --no-cache --coverage'
                 withSonarQubeEnv('WawaSonarQube') {
                     sh 'env'
-                    sh '${SONAR_HOME}/bin/sonar-scanner -Dproject.settings=sonar-project.properties'
+                    sh '${SONAR_HOME}/bin/sonar-scanner'
                 }
             }
             post {
