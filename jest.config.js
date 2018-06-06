@@ -11,7 +11,4 @@ module.exports = {
   testRegex: '/__tests__/.+\\.test\\.tsx?$',
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
   collectCoverageFrom: ['**/*.tsx', '**/*.ts'],
-  moduleNameMapper: {
-    '^src(.*)': '<rootDir>/src/$1',
-  },
 };
