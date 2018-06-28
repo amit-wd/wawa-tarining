@@ -9,8 +9,11 @@
     "lint": "tsc && tslint --project tsconfig.json"
   },
   "dependencies": {
+    "@types/react-native-snap-carousel": "^3.6.3",
     "react": "16.2.0",
+    "react-addons-shallow-compare": "^15.6.2",
     "react-native": "0.54.2",
+    "react-native-snap-carousel": "^3.7.2",
     "react-navigation": "^2.0.1",
     "react-navigation-redux-helpers": "^1.1.1",
     "react-redux": "^5.0.7",

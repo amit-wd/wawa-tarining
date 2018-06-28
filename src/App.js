@@ -7,10 +7,11 @@ import { configureStore } from 'src/Store';
 import { HomeScreen } from 'src/home/HomeScreen';
 
 const AppStack = createStackNavigator({
-  Home: HomeScreen,
+  Home: { screen: HomeScreen }
 });
 
 export default class App extends React.Component {
+
   store = configureStore();
 
   componentDidCatch(error) {

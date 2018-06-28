@@ -5,24 +5,49 @@ exports[`renders correctly 1`] = `
   style={
     Object {
       "flex": 1,
-      "flexDirection": "column",
-      "justifyContent": "center",
-      "paddingBottom": 100,
     }
   }
 >
-  <Text
+  <View
+    accessibilityComponentType={undefined}
+    accessibilityLabel={undefined}
+    accessibilityTraits={undefined}
     accessible={true}
-    allowFontScaling={true}
-    ellipsizeMode="tail"
+    hasTVPreferredFocus={undefined}
+    hitSlop={undefined}
+    isTVSelectable={true}
+    nativeID={undefined}
+    onLayout={undefined}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
     style={
       Object {
-        "fontSize": 25,
-        "textAlign": "center",
+        "alignItems": "center",
+        "backgroundColor": "#DDDDDD",
+        "flex": 0.3,
+        "justifyContent": "center",
       }
     }
+    testID={undefined}
+    tvParallaxProperties={undefined}
   >
-    Edit or remove this file.
-  </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#000",
+          "fontSize": 30,
+        }
+      }
+    >
+      Make My Meal
+    </Text>
+  </View>
 </View>
 `;

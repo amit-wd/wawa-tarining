@@ -5,6 +5,8 @@
 /* **Do not add any secrets to app configuration** */
 
 // export const NAME = get(process.env['NAME'], <sane default>);
-declare const process: any;
+// declare const process: any;
 
-const get = (value, def) => (value ? value : def);
+// const get = (value, def) => (value ? value : def);
+
+export const API_HOST = 'https://jsonplaceholder.typicode.com/';
