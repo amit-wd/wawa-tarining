@@ -5,9 +5,11 @@ import { createStackNavigator } from 'react-navigation';
 
 import { configureStore } from 'src/Store';
 import { HomeScreen } from 'src/home/HomeScreen';
+import { MealScreen } from 'src/meal/MealScreen';
 
 const AppStack = createStackNavigator({
-  Home: { screen: HomeScreen }
+  Home: { screen: HomeScreen },
+  Meal: { screen: MealScreen }
 });
 
 export default class App extends React.Component {
