@@ -7,18 +7,18 @@ import { getData } from './services';
 import {
   FETCHING_DATA,
   getDataSuccess,
-  LOADFOODACTION,
-  LOADFOODACTIONSUCCESS,
-  LOADFOODACTIONFAILURE,
+  LOAD_FOOD_ACTION,
+  LOAD_FOOD_SUCCESS_ACTION,
+  LOAD_FOOD_FAILURE_ACTION,
   getDataFailure,
 } from '../actions/actions';
 
-export const githubUserLoadEpic: Epic<
-  LOADFOODACTION | LOADFOODACTIONSUCCESS | LOADFOODACTIONFAILURE,
+export const foodDataLoadEpic: Epic<
+  LOAD_FOOD_ACTION | LOAD_FOOD_SUCCESS_ACTION | LOAD_FOOD_FAILURE_ACTION,
   never
 > = action$ =>
   action$.pipe(
-    ofType<LOADFOODACTION>(FETCHING_DATA),
+    ofType<LOAD_FOOD_ACTION>(FETCHING_DATA),
     switchMap(() =>
       getData().pipe(
         map(data => getDataSuccess(data)),
@@ -27,4 +27,4 @@ export const githubUserLoadEpic: Epic<
     ),
   );
 
-export const githubUserEpic = combineEpics(githubUserLoadEpic);
+export const foodDataEpic = combineEpics(foodDataLoadEpic);

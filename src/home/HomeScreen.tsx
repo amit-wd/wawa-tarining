@@ -1,8 +1,3 @@
-/**
- * This represents a simple screen-level container component with rendering
- * and styling that is hooked up to the redux store.
- */
-
 import * as React from 'react';
 import { connect } from 'react-redux';
 
@@ -10,48 +5,62 @@ import {
   StyleSheet,
   ViewStyle,
   View,
-  Text,
-  Alert,
   TouchableHighlight,
-  Platform,
-  Dimensions,
+  Text,
   TextStyle,
 } from 'react-native';
-// import Carousel, { ParallaxImage } from 'react-native-snap-carousel';
+import { MyCarousel } from 'src/components/carousel/MyCarousel';
 
-// Export component without provider for testing purposes
-export class Home extends React.Component {
-  alert = () => {
-    Alert.alert('data');
-  };
+interface Props {
+  navigation?;
+  data?;
+}
 
+interface States {}
+
+export class Home extends React.Component<Props, States> {
   static navigationOptions = {
-    title: 'Welcome',
+    title: 'Home',
+    headerTintColor: '#ffffff',
+    headerStyle: {
+      backgroundColor: '#D2691E',
+    },
   };
 
-  // renderItem({ item, index }, parallaxProps) {
-  //   return (
-  //     <View style={styles.item}>
-  //       <ParallaxImage
-  //         source={{ uri: item.thumbnail }}
-  //         containerStyle={styles.imageContainer}
-  //         style={styles.image}
-  //         parallaxFactor={0.4}
-  //         {...parallaxProps}
-  //       />
-  //       <Text style={styles.title} numberOfLines={2}>
-  //         {item.title}
-  //       </Text>
-  //       <View>
-  //         {/* <Carousel
-  //           data={this.state.entries}
-  //           renderItem={this._renderItem}
-  //           hasParallaxImages={true}
-  //         /> */}
-  //       </View>
-  //     </View>
-  //   );
-  // }
+  state = {
+    recents: [],
+    foods: [],
+  };
+
+  addToRecents = data => {
+    if (this.state.recents.length !== 0) {
+      this.setState({ recents: [...this.state.recents, ...data] });
+    } else {
+      this.setState({ recents: [...this.state.recents, ...data] });
+    }
+  };
+
+  navigateTo = () => {
+    const { navigate } = this.props.navigation;
+    navigate('Meal', {
+      data: this.state.foods,
+      addToRecents: data => this.addToRecents(data),
+      recents: this.state.recents,
+    });
+  };
+
+  componentWillMount() {
+    fetch('https://s3.amazonaws.com/mob-training/wawa/wawa-jr.json')
+      .then(response => response.json())
+      .then(responseJson => {
+        this.setState(() => {
+          return { foods: responseJson.menu };
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }
 
   render() {
     return (
@@ -59,154 +68,55 @@ export class Home extends React.Component {
         <TouchableHighlight
           underlayColor={'#fff'}
           style={styles.btnStyle}
-          onPress={this.alert}
+          onPress={this.navigateTo}
         >
-          <Text style={{ color: '#000', fontSize: 30 }}>Make My Meal</Text>
+          <Text style={{ color: '#fff', fontSize: 30 }}>Make My Meal</Text>
         </TouchableHighlight>
+        <View style={styles.carouselStyle}>
+          <Text style={styles.recentsTitle}>Recently Purchased</Text>
+          <MyCarousel openedIn="home" data={this.state.recents} />
+        </View>
       </View>
     );
   }
 }
 
-// Connected component is used with Redux store
-export const HomeScreen = connect()(Home);
-
-// This helps auto-completion / type safety with `StyleSheet.create`
 interface Style {
   container: ViewStyle;
   btnStyle: ViewStyle;
-  carouselContainer: ViewStyle;
-  slideInnerContainer: ViewStyle;
-  shadow: ViewStyle;
-  imageContainer: ViewStyle;
-  imageContainerEven: ViewStyle;
-  image: ViewStyle;
-  radiusMask: ViewStyle;
-  radiusMaskEven: ViewStyle;
-  textContainer: ViewStyle;
-  textContainerEven: ViewStyle;
-  title: TextStyle;
-  titleEven: TextStyle;
-  subtitle: TextStyle;
-  subtitleEven: TextStyle;
+  carouselStyle: ViewStyle;
+  recentsTitle: TextStyle;
 }
 
-const IS_IOS = Platform.OS === 'ios';
-
-const { width: viewportWidth, height: viewportHeight } = Dimensions.get(
-  'window',
-);
-
-function wp(percentage) {
-  const value = (percentage * viewportWidth) / 100;
-  return Math.round(value);
-}
-
-const slideHeight = viewportHeight * 0.36;
-const slideWidth = wp(75);
-const itemHorizontalMargin = wp(2);
-
-export const sliderWidth = viewportWidth;
-export const itemWidth = slideWidth + itemHorizontalMargin * 2;
-
-const entryBorderRadius = 8;
-const colors = {
-  black: '#1a1917',
-  gray: '#888888',
-  background1: '#B721FF',
-  background2: '#21D4FD',
-};
-
-// TypeScript hoists variables. We declare the styles here to keep them out of
-// the way of the component definition
 const styles = StyleSheet.create<Style>({
   container: {
     flex: 1,
+    // backgroundColor: '#FFCC80',
+  },
+  recentsTitle: {
+    fontSize: 20,
+    color: '#000',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   btnStyle: {
     alignItems: 'center',
-    backgroundColor: '#DDDDDD',
+    backgroundColor: '#f44336',
     flex: 0.3,
     justifyContent: 'center',
+    borderRadius: 20,
+    margin: 10,
   },
-  carouselContainer: {
+  carouselStyle: {
     flex: 0.7,
-  },
-  slideInnerContainer: {
-    width: itemWidth,
-    height: slideHeight,
-    paddingHorizontal: itemHorizontalMargin,
-    paddingBottom: 18,
-  },
-  shadow: {
-    position: 'absolute',
-    top: 0,
-    left: itemHorizontalMargin,
-    right: itemHorizontalMargin,
-    bottom: 18,
-    shadowColor: colors.black,
-    shadowOpacity: 0.25,
-    shadowOffset: { width: 0, height: 10 },
-    shadowRadius: 10,
-    borderRadius: entryBorderRadius,
-  },
-  imageContainer: {
-    flex: 1,
-    marginBottom: IS_IOS ? 0 : -1, // Prevent a random Android rendering issue
-    backgroundColor: 'white',
-    borderTopLeftRadius: entryBorderRadius,
-    borderTopRightRadius: entryBorderRadius,
-  },
-  imageContainerEven: {
-    backgroundColor: colors.black,
-  },
-  image: {
-    ...StyleSheet.absoluteFillObject,
-    // resizeMode: 'cover',
-    borderRadius: IS_IOS ? entryBorderRadius : 0,
-    borderTopLeftRadius: entryBorderRadius,
-    borderTopRightRadius: entryBorderRadius,
-  },
-  // image's border radius is buggy on iOS; let's hack it!
-  radiusMask: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0,
-    height: entryBorderRadius,
-    backgroundColor: 'white',
-  },
-  radiusMaskEven: {
-    backgroundColor: colors.black,
-  },
-  textContainer: {
-    justifyContent: 'center',
-    paddingTop: 20 - entryBorderRadius,
-    paddingBottom: 20,
-    paddingHorizontal: 16,
-    backgroundColor: 'white',
-    borderBottomLeftRadius: entryBorderRadius,
-    borderBottomRightRadius: entryBorderRadius,
-  },
-  textContainerEven: {
-    backgroundColor: colors.black,
-  },
-  title: {
-    color: colors.black,
-    fontSize: 13,
-    fontWeight: 'bold',
-    letterSpacing: 0.5,
-  },
-  titleEven: {
-    color: 'white',
-  },
-  subtitle: {
-    marginTop: 6,
-    color: colors.gray,
-    fontSize: 12,
-    fontStyle: 'italic',
-  },
-  subtitleEven: {
-    color: 'rgba(255, 255, 255, 0.7)',
+    margin: 10,
   },
 });
+
+export const HomeScreen = connect(
+  null,
+  null,
+)(Home);
